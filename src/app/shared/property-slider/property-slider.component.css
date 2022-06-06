@@ -1,0 +1,64 @@
+.single-control-container {
+  display: flex;
+  padding-top: 5px;
+  margin-bottom: 10px;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.single-control-lable {
+  color: white;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  font-size: 13px;
+}
+
+/* custom css range slider */
+.slider {
+  -webkit-appearance: none;
+  width: calc(100% - 10px);
+  height: 20px;
+  border-radius: 20px;
+  padding: 0px 3px;
+  background: #1e1e1e;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: 0.2s;
+  transition: opacity 0.2s;
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  background: #1980ff;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  background: #1980ff;
+  cursor: pointer;
+}
+
+/* range slider css finish here */
+
+.range-value {
+  padding: 5px;
+  background-color: #1e1e1e;
+  color: white;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+  border-radius: 5px;
+  margin-left: 5px;
+  font-size: 10px;
+  min-width: 30px;
+  text-align: center;
+}

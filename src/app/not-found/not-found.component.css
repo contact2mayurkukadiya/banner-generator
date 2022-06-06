@@ -1,0 +1,19 @@
+.no-layer-found {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .no-layer-found-text {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    margin: 5px;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+  }
+  
+  .sdbar-logo {
+    margin: auto;
+    max-height: 35px;
+    width: 161px;
+  }

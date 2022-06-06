@@ -1,0 +1,21 @@
+fabric  js object content type: 
+-----------------------------------
+1 : textbox
+2 : image
+3 : transparent image
+4 : 3d image
+5 : button
+6 : iconButton
+7 : rect
+8 : circle,
+
+
+npm install fabric --save
+npm i jquery
+npm install @types/jquery --save-dev
+npm i ngx-color-picker
+npm i file-saver
+npm i file-saver
+npm i jszip
+// npm i round-slider
+npm install --save changedpi

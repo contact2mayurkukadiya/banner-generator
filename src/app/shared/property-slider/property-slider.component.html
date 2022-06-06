@@ -1,0 +1,9 @@
+<div class="single-control-container">
+    <span class="single-control-lable">{{lable}} : </span>
+    <div style="display: flex;">
+        <input type="range" (ngModelChange)="modal = $event; change($event)" [min]="min" [max]="max" [step]="step"
+            [(ngModel)]="modal" class="slider">
+        <span class="range-value" *ngIf="format == ''">{{modal}}</span>
+        <span class="range-value" *ngIf="format == 'opacity'">{{modal * 100}} %</span>
+    </div>
+</div>

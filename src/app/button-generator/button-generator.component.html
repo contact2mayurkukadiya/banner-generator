@@ -1,0 +1,508 @@
+<div class="main-container">
+    <div class="header-style">
+        <labled-icon-button (onClick)="downloadImage()" lable="Download Image" color="#ffffff" backgroundColor="#1E1E1E"
+            iconSrc="assets/icons/downloadicon.svg" style="margin: 0px 10px;float: right;"></labled-icon-button>
+        <labled-icon-button (onClick)="downloadJson()" lable="Download JSON" color="#ffffff" backgroundColor="#179D5B"
+            iconSrc="assets/icons/downloadicon.svg" style="margin: 0px 10px;float: right;"></labled-icon-button>
+    </div>
+    <div class="main-wrapper">
+        <div class="editor-left-sidebar shown">
+            <div class="vertical-tab-button-container">
+                <button class="tab-button tablinks active">
+                    <img src="./assets/icons/heading-white.svg" class="tab-icon" />
+                    <p class="tab-title">Properties</p>
+                </button>
+            </div>
+            <div class="left-wrapper">
+                <div class="inner-left-wrapper">
+                    <div class="property-panel">
+                        <div class="property-panel-wrapper">
+                            <div class="property-panel-content" *ngIf="selected">
+
+                                <!-- Button Size Properties (Size) -->
+                                <div class="single-control-container">
+                                    <span class="single-control-lable">Width : </span>
+                                    <input type="number" class="text-size-value-container" [(ngModel)]="props.width"
+                                        (change)="setButtonSize({width: props.width, height: props.height})" />
+                                </div>
+                                <div class="single-control-container">
+                                    <span class="single-control-lable">Height : </span>
+                                    <input type="number" class="text-size-value-container" [(ngModel)]="props.height"
+                                        (change)="setButtonSize({width: props.width, height: props.height})" />
+                                </div>
+
+                                <!-- Text Properties (Font) -->
+                                <div class="single-control-container" *ngIf="selected.type == 'button'">
+                                    <span class="single-control-lable">Font : </span>
+                                    <select class="font-selection-box" [(ngModel)]="props.fontFamily"
+                                        (change)="changeFontFamily(props.fontFamily)">
+                                        <option [value]="font.fontName" *ngFor="let font of fontList">
+                                            {{font.fontLabel}}
+                                        </option>
+                                    </select>
+                                </div>
+
+                                <!-- Text Properties (font Size) -->
+                                <div class="single-control-container" *ngIf="selected.type == 'button'">
+                                    <span class="single-control-lable">Size : </span>
+                                    <input type="number" class="text-size-value-container" [(ngModel)]="props.fontSize"
+                                        (change)="setFontSize(props.fontSize)" />
+                                </div>
+
+                                <!-- Text Properties (Style) -->
+                                <div class="single-control-container" *ngIf="selected.type == 'button'">
+                                    <span class="single-control-lable">Style : </span>
+                                    <div>
+                                        <button class="font-style-buttons" (click)="toggleStyle('bold')"
+                                            [ngClass]="{'active': props.isBold}">
+                                            <svg preserveAspectRatio="xMidYMid meet" style="height: 20px; width: 20px;"
+                                                version="1.0" viewBox="0 0 1024.000000 1024.000000"
+                                                xmlns="http://www.w3.org/2000/svg" class="ng-star-inserted">
+                                                <g fill="#ffffff" stroke="none"
+                                                    transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)">
+                                                    <path
+                                                        d="M1480 5120 l0 -5100 2343 3 c2191 2 2349 4 2447 20 384 65 716 180 1017 352 464 265 850 654 1113 1124 159 282 280 640 335 991 26 159 32 576 11 754 -100 860 -566 1621 -1288 2104 -84 56 -96 67 -85 81 7 9 46 62 89 118 500 666 687 1540 507 2368 -172 788 -678 1481 -1382 1894 -271 158 -574 274 -882 336 -278 56 -218 55 -2302 55 l-1923 0 0 -5100z m3456 3629 c443 -61 820 -439 967 -969 163 -585 8 -1236 -386 -1622 -139 -137 -294 -226 -477 -276 l-95 -26 -637 -4 -638 -3 0 1455 0 1456 594 0 c372 0 624 -4 672 -11z m734 -4381 c239 -59 418 -163 592 -347 391 -411 518 -1086 312 -1663 -40 -112 -138 -295 -208 -389 -76 -100 -216 -238 -304 -298 -94 -63 -235 -128 -347 -158 l-100 -28 -972 -3 -973 -3 0 1456 0 1456 968 -4 c843 -3 975 -5 1032 -19z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <button class="font-style-buttons" (click)="toggleStyle('italic')"
+                                            [ngClass]="{'active': props.isItalic}">
+                                            <svg preserveAspectRatio="xMidYMid meet" style="height: 20px; width: 20px;"
+                                                version="1.0" viewBox="0 0 1024.000000 1024.000000"
+                                                xmlns="http://www.w3.org/2000/svg" class="ng-star-inserted">
+                                                <g fill="#ffffff" stroke="none"
+                                                    transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)">
+                                                    <path
+                                                        d="M4065 10206 c-203 -64 -335 -243 -335 -451 0 -205 133 -385 329 -445 60 -19 95 -20 742 -20 373 0 679 -3 679 -7 -1 -5 -376 -1880 -833 -4168 l-833 -4160 -794 -5 -795 -5 -75 -36 c-133 -65 -220 -164 -255 -292 -24 -88 -17 -230 14 -310 43 -109 148 -214 258 -259 l58 -23 1975 0 1975 0 78 37 c383 183 344 743 -62 868 -60 19 -95 20 -742 20 -373 0 -679 3 -679 8 1 4 376 1879 833 4167 l833 4160 794 5 795 5 75 36 c180 87 270 230 270 428 0 141 -47 249 -147 341 -61 56 -90 73 -171 101 -53 18 -118 19 -2001 18 -1544 0 -1954 -3 -1986 -13z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <button class="font-style-buttons" (click)="toggleStyle('underline')"
+                                            [ngClass]="{'active': props.isUnderLine}">
+                                            <svg preserveAspectRatio="xMidYMid meet" style="height:20px; width:20px;"
+                                                version="1.0" viewBox="0 0 1024.000000 1024.000000"
+                                                xmlns="http://www.w3.org/2000/svg" class="ng-star-inserted">
+                                                <g fill="#ffffff" stroke="none"
+                                                    transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)">
+                                                    <path
+                                                        d="M1953 7533 c3 -2684 3 -2688 24 -2813 48 -279 103 -484 190 -705 240 -609 662 -1129 1212 -1494 398 -263 826 -423 1336 -498 171 -25 639 -25 810 0 289 43 514 101 750 194 820 323 1475 978 1798 1798 87 221 142 426 190 705 21 125 21 129 24 2813 l3 2687 -425 0 -424 0 -4 -2617 c-3 -2364 -4 -2628 -19 -2723 -53 -338 -148 -610 -306 -877 -557 -940 -1681 -1367 -2705 -1029 -824 272 -1429 975 -1571 1826 -34 205 -36 352 -36 2893 l0 2527 -425 0 -425 0 3 -2687z">
+                                                    </path>
+                                                    <path
+                                                        d="M1810 445 l0 -425 3310 0 3310 0 0 425 0 425 -3310 0 -3310 0 0 -425z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <button class="font-style-buttons" (click)="toggleStyle('strikethrough')"
+                                            [ngClass]="{'active': props.isStrikeThrough}">
+                                            <svg preserveAspectRatio="xMidYMid meet" style="height: 20px; width: 20px;"
+                                                version="1.0" viewBox="0 0 1024.000000 1024.000000"
+                                                xmlns="http://www.w3.org/2000/svg" class="ng-star-inserted">
+                                                <g fill="#ffffff" stroke="none"
+                                                    transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)">
+                                                    <path
+                                                        d="M4675 9759 c-1307 -110 -2276 -639 -2723 -1489 -107 -204 -190 -463 -228 -715 -27 -178 -25 -540 4 -730 73 -471 247 -833 551 -1147 l96 -98 -1177 0 -1178 0 0 -460 0 -460 2528 0 2527 0 235 -40 c1162 -200 1666 -380 1985 -711 168 -174 258 -361 301 -624 22 -135 21 -370 -1 -500 -127 -750 -840 -1237 -2009 -1372 -203 -24 -735 -24 -943 0 -670 76 -1183 269 -1543 579 -157 136 -303 331 -367 489 -16 38 -32 69 -36 69 -15 0 -842 -302 -851 -311 -13 -12 33 -129 105 -267 384 -740 1188 -1249 2261 -1432 273 -47 442 -61 799 -67 458 -7 760 15 1111 82 1243 240 2101 927 2343 1879 56 220 69 340 69 606 -1 189 -5 263 -22 375 -73 472 -246 833 -551 1147 l-96 98 1178 0 1177 0 0 460 0 460 -2522 0 -2523 0 -265 45 c-701 120 -1122 226 -1444 364 -577 248 -837 625 -838 1216 -1 407 134 724 424 1000 446 424 1267 666 2183 642 809 -21 1449 -219 1886 -584 162 -134 320 -341 386 -504 16 -38 31 -69 35 -69 14 0 843 303 852 311 13 12 -34 129 -105 267 -384 739 -1175 1242 -2254 1431 -292 51 -440 63 -855 66 -217 2 -444 -1 -505 -6z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <button class="font-style-buttons" (click)="toggleStyle('overline')"
+                                            [ngClass]="{'active': props.isOverLine}">
+                                            <svg preserveAspectRatio="xMidYMid meet" style="height: 20px; width: 20px;"
+                                                version="1.0" viewBox="0 0 1024.000000 1024.000000"
+                                                xmlns="http://www.w3.org/2000/svg" class="ng-star-inserted">
+                                                <g fill="#ffffff" stroke="none"
+                                                    transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)">
+                                                    <path
+                                                        d="M20 9550 l0 -510 5100 0 5100 0 0 510 0 510 -5100 0 -5100 0 0 -510z">
+                                                    </path>
+                                                    <path
+                                                        d="M2772 4266 c-1013 -2235 -1845 -4071 -1848 -4080 -6 -15 44 -16 573 -16 l580 0 563 1275 564 1275 1930 -2 1930 -3 559 -1272 560 -1273 580 0 c527 0 579 1 573 16 -3 9 -835 1845 -1848 4080 l-1841 4064 -517 0 -517 0 -1841 -4064z m3100 1139 l735 -1665 -1477 0 -1477 0 735 1665 c404 916 738 1665 742 1665 4 0 338 -749 742 -1665z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Text Properties (Alignement) -->
+                                <div class="single-control-container" *ngIf="selected.type == 'button'">
+                                    <span class="single-control-lable">Allignment : </span>
+                                    <div>
+                                        <button class="font-style-buttons" (click)="toggleAlignment('left')"
+                                            [ngClass]="{'active': props.textAlign == 'left'}">
+                                            <svg preserveAspectRatio="xMidYMid meet" style="height: 20px; width: 20px;"
+                                                version="1.0" viewBox="0 0 1024.000000 1024.000000"
+                                                xmlns="http://www.w3.org/2000/svg" class="ng-star-inserted">
+                                                <g fill="#ffffff" stroke="none"
+                                                    transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)">
+                                                    <path
+                                                        d="M355 10210 c-234 -47 -392 -298 -331 -525 39 -148 138 -250 287 -296 59 -19 186 -19 4808 -19 4245 0 4753 2 4806 15 162 42 276 168 306 338 39 213 -120 440 -339 486 -63 13 -9472 14 -9537 1z">
+                                                    </path>
+                                                    <path
+                                                        d="M330 8326 c-151 -41 -267 -155 -304 -301 -63 -241 79 -473 322 -524 38 -8 878 -11 3025 -11 3283 0 3032 -5 3146 63 141 84 219 254 193 421 -27 169 -135 298 -291 347 -62 19 -118 19 -3054 18 -2328 0 -3002 -3 -3037 -13z">
+                                                    </path>
+                                                    <path
+                                                        d="M352 6469 c-110 -21 -214 -91 -272 -181 -153 -237 -38 -558 230 -638 64 -20 109 -20 4835 -18 l4770 3 68 32 c278 132 341 485 123 691 -62 59 -135 97 -216 112 -66 12 -9474 12 -9538 -1z">
+                                                    </path>
+                                                    <path
+                                                        d="M320 4584 c-119 -32 -217 -116 -274 -234 -29 -60 -31 -73 -31 -170 0 -97 2 -110 32 -172 58 -123 166 -211 293 -238 41 -8 811 -10 3060 -8 l3005 3 67 32 c88 42 160 110 198 187 118 244 3 519 -248 596 -63 20 -103 20 -3056 19 -2600 0 -2998 -2 -3046 -15z">
+                                                    </path>
+                                                    <path
+                                                        d="M353 2729 c-152 -30 -278 -142 -323 -286 -34 -112 -21 -242 36 -338 38 -65 134 -150 201 -177 l58 -23 4800 0 4800 0 67 32 c270 128 330 477 116 679 -65 61 -115 89 -200 109 -55 13 -648 15 -4788 14 -2599 -1 -4744 -5 -4767 -10z">
+                                                    </path>
+                                                    <path
+                                                        d="M350 859 c-124 -24 -244 -122 -303 -246 -30 -63 -32 -76 -32 -173 0 -97 2 -110 32 -172 44 -94 109 -160 202 -206 l75 -37 3023 -3 3023 -2 62 21 c240 81 351 348 243 587 -51 112 -177 208 -304 232 -68 13 -5956 12 -6021 -1z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <button class="font-style-buttons" (click)="toggleAlignment('center')"
+                                            [ngClass]="{'active': props.textAlign == 'center'}">
+                                            <svg preserveAspectRatio="xMidYMid meet" style="height: 20px; width: 20px;"
+                                                version="1.0" viewBox="0 0 1024.000000 1024.000000"
+                                                xmlns="http://www.w3.org/2000/svg" class="ng-star-inserted">
+                                                <g fill="#ffffff" stroke="none"
+                                                    transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)">
+                                                    <path
+                                                        d="M320 10224 c-207 -55 -348 -276 -311 -485 24 -141 125 -271 248 -321 l58 -23 4790 -3 c4226 -2 4796 0 4841 13 71 21 166 87 210 146 97 133 110 311 32 463 -29 56 -109 138 -166 169 -113 62 288 57 -4907 56 -4140 0 -4747 -2 -4795 -15z">
+                                                    </path>
+                                                    <path
+                                                        d="M2126 8349 c-249 -37 -413 -303 -337 -548 35 -113 93 -186 194 -245 100 -59 -83 -56 3133 -56 1936 0 2970 3 3005 10 30 6 82 24 116 41 202 98 284 350 185 563 -50 106 -126 175 -240 219 l-57 22 -2970 1 c-1633 1 -2996 -2 -3029 -7z">
+                                                    </path>
+                                                    <path
+                                                        d="M341 6479 c-231 -45 -376 -268 -328 -503 37 -180 173 -310 354 -336 95 -13 9413 -13 9508 0 92 14 163 48 228 109 250 237 141 656 -189 726 -60 13 -696 15 -4799 14 -2606 -1 -4750 -5 -4774 -10z">
+                                                    </path>
+                                                    <path
+                                                        d="M2052 4581 c-160 -55 -266 -195 -279 -366 -14 -181 73 -332 235 -412 l76 -38 3005 -3 c3359 -3 3070 -9 3189 68 102 65 164 163 181 284 30 212 -81 399 -277 465 l-61 21 -3008 0 c-2886 -1 -3010 -1 -3061 -19z">
+                                                    </path>
+                                                    <path
+                                                        d="M350 2729 c-128 -21 -249 -112 -303 -227 -108 -230 -8 -490 223 -585 l55 -22 4765 -3 c3374 -1 4780 1 4817 9 129 26 238 113 296 237 30 62 32 74 32 172 0 86 -5 116 -23 163 -45 110 -127 189 -251 239 l-56 23 -4750 1 c-2759 1 -4773 -2 -4805 -7z">
+                                                    </path>
+                                                    <path
+                                                        d="M2080 844 c-225 -60 -356 -295 -295 -528 35 -135 141 -246 273 -286 67 -20 80 -20 3083 -18 l3015 3 76 38 c168 82 254 252 227 444 -20 142 -110 262 -242 324 l-72 34 -3005 2 c-2622 2 -3012 0 -3060 -13z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <button class="font-style-buttons" (click)="toggleAlignment('right')"
+                                            [ngClass]="{'active': props.textAlign == 'right'}">
+                                            <svg preserveAspectRatio="xMidYMid meet" style="height: 20px; width: 20px;"
+                                                version="1.0" viewBox="0 0 1024.000000 1024.000000"
+                                                xmlns="http://www.w3.org/2000/svg" class="ng-star-inserted">
+                                                <g fill="#ffffff" stroke="none"
+                                                    transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)">
+                                                    <path
+                                                        d="M340 10204 c-253 -68 -390 -356 -282 -589 54 -114 139 -188 263 -226 59 -19 186 -19 4798 -19 4236 0 4743 2 4796 15 162 42 279 172 307 339 36 215 -122 439 -340 485 -38 8 -1353 11 -4770 10 -4119 0 -4724 -2 -4772 -15z">
+                                                    </path>
+                                                    <path
+                                                        d="M3840 8324 c-158 -42 -275 -178 -301 -349 -35 -222 112 -434 330 -475 80 -15 5952 -14 6023 1 170 36 297 168 329 341 39 212 -101 427 -315 484 -80 21 -5986 19 -6066 -2z">
+                                                    </path>
+                                                    <path
+                                                        d="M362 6469 c-210 -41 -354 -227 -339 -438 13 -184 125 -329 295 -381 63 -20 110 -20 4808 -20 l4745 0 60 20 c79 27 123 56 182 119 122 130 148 320 67 481 -55 109 -174 197 -299 220 -67 12 -9456 12 -9519 -1z">
+                                                    </path>
+                                                    <path
+                                                        d="M3843 4585 c-159 -43 -267 -158 -300 -320 -40 -197 53 -382 235 -468 l67 -32 3030 0 3030 0 55 22 c260 106 349 425 181 648 -41 54 -114 108 -191 141 -44 19 -114 19 -3050 21 -2566 1 -3013 0 -3057 -12z">
+                                                    </path>
+                                                    <path
+                                                        d="M362 2729 c-61 -12 -148 -53 -198 -94 -146 -120 -187 -362 -88 -530 38 -65 134 -150 201 -177 l58 -23 4790 0 4790 0 67 32 c219 103 307 357 199 571 -32 64 -116 149 -179 181 -106 54 223 51 -4882 50 -2593 -1 -4734 -5 -4758 -10z">
+                                                    </path>
+                                                    <path
+                                                        d="M3870 859 c-118 -23 -246 -123 -295 -231 -108 -239 3 -506 243 -587 l61 -21 2995 0 c2954 0 2995 0 3058 20 160 49 267 175 291 343 32 221 -117 429 -341 476 -65 14 -5942 14 -6012 0z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <button class="font-style-buttons" (click)="toggleAlignment('justify')"
+                                            [ngClass]="{'active': props.textAlign == 'justify'}">
+                                            <svg preserveAspectRatio="xMidYMid meet" style="height: 20px; width: 20px;"
+                                                version="1.0" viewBox="0 0 1024.000000 1024.000000"
+                                                xmlns="http://www.w3.org/2000/svg" class="ng-star-inserted">
+                                                <g fill="#ffffff" stroke="none"
+                                                    transform="translate(0.000000,1024.000000) scale(0.100000,-0.100000)">
+                                                    <path
+                                                        d="M355 9703 c-159 -35 -273 -138 -325 -294 -29 -83 -25 -225 8 -309 44 -112 134 -200 249 -243 l58 -22 4730 -3 c3267 -2 4751 1 4799 8 142 22 250 100 313 228 38 76 38 76 38 201 0 122 -1 128 -32 192 -60 122 -155 202 -278 234 -53 13 -558 15 -4800 14 -2607 -1 -4749 -3 -4760 -6z">
+                                                    </path>
+                                                    <path
+                                                        d="M300 6921 c-75 -24 -96 -36 -153 -90 -94 -87 -137 -188 -137 -320 0 -186 89 -327 255 -403 l50 -23 4790 -3 c4703 -2 4791 -2 4847 17 110 37 192 113 245 227 26 55 28 68 28 184 0 114 -2 130 -26 180 -54 113 -146 196 -256 230 -65 20 -80 20 -4827 19 -4525 0 -4764 -1 -4816 -18z">
+                                                    </path>
+                                                    <path
+                                                        d="M315 4166 c-120 -38 -206 -115 -263 -234 -36 -75 -37 -80 -37 -192 0 -95 4 -124 23 -170 44 -111 141 -207 252 -253 l55 -22 4745 -3 c3360 -1 4760 1 4797 9 130 26 247 121 306 246 26 57 32 83 35 161 5 116 -15 198 -67 280 -48 73 -99 117 -181 156 l-65 31 -4780 2 c-3842 1 -4788 -1 -4820 -11z">
+                                                    </path>
+                                                    <path
+                                                        d="M340 1399 c-140 -28 -259 -139 -311 -291 -28 -83 -23 -224 10 -311 43 -110 132 -196 249 -241 l57 -21 4735 -3 c3384 -2 4754 0 4800 8 141 24 245 101 307 228 38 76 38 76 38 201 0 123 -1 128 -34 196 -60 123 -172 211 -300 235 -68 13 -9485 12 -9551 -1z">
+                                                    </path>
+                                                </g>
+                                            </svg>
+                                        </button>
+                                        <!-- <button class="font-style-buttons" (click)="toggleAlignment('justify-left')"
+                      [ngClass]="{'active': props.textAlign == 'justify-left'}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="height: 20px; width: 20px;">
+                        <path fill="#ffffff"
+                          d="M100.69 363.29c10 10 27.31 2.93 27.31-11.31V160c0-14.32-17.33-21.31-27.31-11.31l-96 96a16 16 0 000 22.62zM432 416H16a16 16 0 00-16 16v32a16 16 0 0016 16h416a16 16 0 0016-16v-32a16 16 0 00-16-16zm3.17-128H204.83A12.82 12.82 0 00192 300.83v38.34A12.82 12.82 0 00204.83 352h230.34A12.82 12.82 0 00448 339.17v-38.34A12.82 12.82 0 00435.17 288zm0-128H204.83A12.82 12.82 0 00192 172.83v38.34A12.82 12.82 0 00204.83 224h230.34A12.82 12.82 0 00448 211.17v-38.34A12.82 12.82 0 00435.17 160zM432 32H16A16 16 0 000 48v32a16 16 0 0016 16h416a16 16 0 0016-16V48a16 16 0 00-16-16z" />
+                      </svg>
+                    </button>
+                    <button class="font-style-buttons" (click)="toggleAlignment('justify-right')"
+                      [ngClass]="{'active': props.textAlign == 'justify-right'}">
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" style="height: 20px; width: 20px;">
+                        <path fill="#ffffff"
+                          d="M27.31 363.3l96-96a16 16 0 000-22.62l-96-96C17.27 138.66 0 145.78 0 160v192c0 14.31 17.33 21.3 27.31 11.3zM432 416H16a16 16 0 00-16 16v32a16 16 0 0016 16h416a16 16 0 0016-16v-32a16 16 0 00-16-16zm3.17-128H204.83A12.82 12.82 0 00192 300.83v38.34A12.82 12.82 0 00204.83 352h230.34A12.82 12.82 0 00448 339.17v-38.34A12.82 12.82 0 00435.17 288zm0-128H204.83A12.82 12.82 0 00192 172.83v38.34A12.82 12.82 0 00204.83 224h230.34A12.82 12.82 0 00448 211.17v-38.34A12.82 12.82 0 00435.17 160zM432 32H16A16 16 0 000 48v32a16 16 0 0016 16h416a16 16 0 0016-16V48a16 16 0 00-16-16z" />
+                      </svg>
+                    </button> -->
+                                    </div>
+                                </div>
+
+                                <!-- Button Properties (text opacity)-->
+                                <property-slider timeOut="0" lable="Text Opacity" min="0" max="1" step="0.1"
+                                    [modal]="props.textOpacity"
+                                    (onChange)="props.textOpacity = $event; setOpacity(props.textOpacity)"
+                                    format="opacity" *ngIf="selected.type == 'button'">
+                                </property-slider>
+
+                                <!-- Text Properties (Opacity spacing lineHeight) -->
+                                <property-slider timeOut="0" lable="Spacing" min="-200" max="1000" step="1"
+                                    [modal]="props.charSpacing"
+                                    (onChange)="props.charSpacing = $event; setSpacing(props.charSpacing)"
+                                    *ngIf="selected.type == 'button'">
+                                </property-slider>
+                                <property-slider timeOut="0" lable="Line Height" min="0.1" max="10" step="0.1"
+                                    [modal]="props.lineHeight"
+                                    (onChange)="props.lineHeight = $event; setLineHeight(props.lineHeight)"
+                                    *ngIf="selected.type == 'button'">
+                                </property-slider>
+
+                                <!-- Text Properties (Color) -->
+                                <div class="single-control-container" *ngIf="selected.type == 'button'">
+                                    <span class="single-control-lable">Color : </span>
+                                    <div style="display: flex;">
+                                        <span class="color-value-display"
+                                            (click)="copyValue(props.fill)">{{props.fill}}</span>
+                                        <div class="color-picker-button" [cpPosition]="'left-top'"
+                                            (cpSliderDragEnd)="setFill(props.fill)"
+                                            (cpInputChange)="setFill(props.fill)" [(colorPicker)]="props.fill"
+                                            [style.background]="props.fill">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Text Properties (background Color) -->
+                                <div class="single-control-container" *ngIf="selected.type == 'button'">
+                                    <span class="single-control-lable">Background Color : </span>
+                                    <div style="display: flex;">
+                                        <span class="color-value-display"
+                                            (click)="copyValue(props.backgroundColor)">{{props.backgroundColor}}</span>
+                                        <div class="color-picker-button"
+                                            (cpSliderDragEnd)="setBackground(props.backgroundColor)"
+                                            [cpPosition]="'left-top'"
+                                            (cpInputChange)="setBackground(props.backgroundColor)"
+                                            [(colorPicker)]="props.backgroundColor"
+                                            [style.background]="props.backgroundColor">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Button Properties -->
+                                <div class="shadow-container">
+                                    <span class="group-title">Color Properties</span>
+                                    <div class="button-bg-color-tab-cotnainer">
+                                        <Button class="background-tabs-links tab-button-btn-background"
+                                            [ngClass]="{'active': activeButtonBackgroundTab == 'tab_1'}"
+                                            (click)="openButtonBackgroundTab('tab_1')">Solid</Button>
+                                        <Button class="background-tabs-links tab-button-btn-background"
+                                            [ngClass]="{'active': activeButtonBackgroundTab == 'tab_2'}"
+                                            (click)="openButtonBackgroundTab('tab_2')">Gradient</Button>
+                                    </div>
+                                    <div class="single-control-container" *ngIf="activeButtonBackgroundTab == 'tab_1'">
+                                        <span class="single-control-lable">Background Color : </span>
+                                        <div style="display: flex;">
+                                            <span class="color-value-display"
+                                                (click)="copyValue(props.buttonFill)">{{props.buttonFill}}</span>
+                                            <div class="color-picker-button" [cpOutputFormat]="'rgba'"
+                                                [cpPosition]="'left-top'"
+                                                (cpSliderDragEnd)="setButtonFill(props.buttonFill)"
+                                                (cpInputChange)="setButtonFill(props.buttonFill)"
+                                                [(colorPicker)]="props.buttonFill"
+                                                [style.background]="props.buttonFill">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-control-container no-margin" *ngIf="activeButtonBackgroundTab == 'tab_2'">
+                                        <div class="color-picker-button" [cpOutputFormat]="'hex'"
+                                            [cpPosition]="'right-bottom'"
+                                            (cpSliderChange)="changeGradientIndexColor(props.activeGradientColorIndex, props.activeGradientColor)"
+                                            (cpInputChange)="changeGradientIndexColor(props.activeGradientColorIndex, props.activeGradientColor)"
+                                            [(colorPicker)]="props.activeGradientColor"
+                                            [style.background]="props.activeGradientColor"></div>
+                                        <div>
+                                            <button class="gradient-type-btn"
+                                                [ngClass]="{'active': props.gradientType == 'linear'}"
+                                                (click)="props.gradientType = 'linear'; setButtonGradient(props.buttonGradientArray)">
+                                                <div class="linear-gradient gradient-icon"></div>
+                                            </button>
+                                            <button class="gradient-type-btn"
+                                                [ngClass]="{'active': props.gradientType == 'radial'}"
+                                                (click)="props.gradientType = 'radial'; setButtonGradient(props.buttonGradientArray)">
+                                                <div class="radial-gradient gradient-icon"></div>
+                                            </button>
+                                            <div class="is-center-checkbox-container"
+                                                *ngIf="props.gradientType == 'radial'">
+                                                <input type="checkbox" [(ngModel)]="props.gradientPositionIsCenter"
+                                                    id="isCenterGradient" name="isCenterGradient"
+                                                    class="is-center-checkbox"
+                                                    (change)="setButtonGradient(props.buttonGradientArray)">
+                                                <label for="isCenterGradient" class="center-gradient-chckbox">
+                                                    Center</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="single-control-container" *ngIf="activeButtonBackgroundTab == 'tab_2'">
+                                        <div class="gradient-control-container">
+                                            <gradient-picker #button class="gradient-color-control"
+                                                [containerClass]="'gradient-picker-class'"
+                                                (onPickerChange)="setButtonGradient($event)"
+                                                (onColorSliding)="setButtonGradient($event)"
+                                                (onColorControlActivate)="setActiveColor($event)"
+                                                [colorArray]="props.buttonGradientArray" [minColorStop]="0"
+                                                [maxColorStop]="1" [maximumColors]="5" [type]="'button'">
+                                            </gradient-picker>
+                                            <circular-angle-control
+                                                *ngIf="props.gradientType != 'radial' || props.gradientPositionIsCenter != true"
+                                                [radius]="25" [angle]="props.buttonGradientAngle"
+                                                (onAngleChange)="props.buttonGradientAngle = $event; setButtonGradient(props.buttonGradientArray)">
+                                            </circular-angle-control>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="shadow-container">
+                                    <span class="group-title">Button Properties</span>
+                                    <div class="single-control-container">
+                                        <span class="single-control-lable">Border Color : </span>
+                                        <div style="display: flex;">
+                                            <span class="color-value-display"
+                                                (click)="copyValue(props.buttonStrokeColor)">{{props.buttonStrokeColor}}</span>
+                                            <div class="color-picker-button" [cpOutputFormat]="'hex'"
+                                                [cpPosition]="'left-top'"
+                                                (cpSliderDragEnd)="setButtonStrokeColor(props.buttonStrokeColor)"
+                                                (cpInputChange)="setButtonStrokeColor(props.buttonStrokeColor)"
+                                                [(colorPicker)]="props.buttonStrokeColor"
+                                                [style.background]="props.buttonStrokeColor"></div>
+                                        </div>
+                                    </div>
+                                    <property-slider timeOut="0" lable="Button Opacity" min="0" max="1" step="0.1"
+                                        [modal]="props.opacity"
+                                        (onChange)="props.opacity = $event; setOpacity(props.opacity, true)"
+                                        format="opacity">
+                                    </property-slider>
+                                    <property-slider timeOut="0" lable="Border Size" min="0" max="30" step="1"
+                                        [modal]="props.buttonStrokeWidth"
+                                        (onChange)="props.buttonStrokeWidth = $event; setButtonStrokeSize(props.buttonStrokeWidth)">
+                                    </property-slider>
+                                    <property-slider timeOut="0" lable="Corner Radius" min="0" max="100" step="1"
+                                        [modal]="props.buttonRadius"
+                                        (onChange)="props.buttonRadius = $event; setButtonRadius(props.buttonRadius)">
+                                    </property-slider>
+                                </div>
+
+                                <!-- Text Properties (Shadow) -->
+                                <div class="shadow-container">
+                                    <span class="group-title">Shadow Properties</span>
+                                    <div class="single-control-container">
+                                        <span class="single-control-lable">Shadow Color : </span>
+                                        <div style="display: flex;">
+                                            <span class="color-value-display"
+                                                (click)="copyValue(props.shadow.color)">{{props.shadow.color}}</span>
+                                            <div class="color-picker-button" [cpOutputFormat]="'hex'"
+                                                [cpPosition]="'left-top'" (cpSliderDragEnd)="setShadow(props.shadow)"
+                                                (cpInputChange)="setShadow(props.shadow)"
+                                                [(colorPicker)]="props.shadow.color"
+                                                [style.background]="props.shadow.color"></div>
+                                        </div>
+                                    </div>
+                                    <property-slider timeOut="0" lable="Shadow Blur" min="0" max="100" step="1"
+                                        [modal]="props.shadow.blur"
+                                        (onChange)="props.shadow.blur = $event; setShadow(props.shadow)">
+                                    </property-slider>
+                                    <property-slider timeOut="0" lable="Offset X" min="-100" max="100" step="1"
+                                        [modal]="props.shadow.offsetX"
+                                        (onChange)="props.shadow.offsetX = $event; setShadow(props.shadow)">
+                                    </property-slider>
+                                    <property-slider timeOut="0" lable="Offset Y" min="-100" max="100" step="1"
+                                        [modal]="props.shadow.offsetY"
+                                        (onChange)="props.shadow.offsetY = $event; setShadow(props.shadow)">
+                                    </property-slider>
+                                </div>
+
+                                <!-- Button Properties (button Text Shadow) -->
+                                <div class="shadow-container">
+                                    <span class="group-title">Button Text Shadow</span>
+                                    <div class="single-control-container">
+                                        <span class="single-control-lable">Color : </span>
+                                        <div style="display: flex;">
+                                            <span class="color-value-display"
+                                                (click)="copyValue(props.TShadow.color)">{{props.TShadow.color}}</span>
+                                            <div class="color-picker-button" [cpOutputFormat]="'hex'"
+                                                [cpPosition]="'left-top'"
+                                                (cpSliderDragEnd)="setBTextShadow(props.TShadow, true)"
+                                                (cpInputChange)="setBTextShadow(props.TShadow)"
+                                                [(colorPicker)]="props.TShadow.color"
+                                                [style.background]="props.TShadow.color">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <property-slider timeOut="0" lable="Shadow Blur" min="0" max="100" step="1"
+                                        [modal]="props.TShadow.blur"
+                                        (onChange)="props.TShadow.blur = $event; setBTextShadow(props.TShadow, true)">
+                                    </property-slider>
+                                    <property-slider timeOut="0" lable="Offset X" min="-100" max="100" step="1"
+                                        [modal]="props.TShadow.offsetX"
+                                        (onChange)="props.TShadow.offsetX = $event; setBTextShadow(props.TShadow, true)">
+                                    </property-slider>
+                                    <property-slider timeOut="0" lable="Offset Y" min="-100" max="100" step="1"
+                                        [modal]="props.TShadow.offsetY"
+                                        (onChange)="props.TShadow.offsetY = $event; setBTextShadow(props.TShadow, true)">
+                                    </property-slider>
+                                </div>
+
+                                <!-- Icon Button Properties -->
+                                <div class="shadow-container">
+                                    <span class="group-title">Button Icon Properties</span>
+                                    <div class="single-control-container">
+                                        <span class="single-control-lable">Colors : </span>
+                                        <div style="display: flex;">
+                                            <div class="color-picker-button" style="margin: 0px 5px;"
+                                                [cpOutputFormat]="'hex'" *ngFor="let color of props.buttonIconColors"
+                                                [cpPosition]="'left-top'"
+                                                (cpSliderDragEnd)="setButtonIconFill(props.buttonIconColors)"
+                                                (cpInputChange)="setButtonIconFill(props.buttonIconColors)"
+                                                [(colorPicker)]="color.color" [style.background]="color.color"></div>
+                                        </div>
+                                    </div>
+                                    <property-slider timeOut="0" lable="Icon Size" min="5" max="100" step="1"
+                                        [modal]="props.buttonIconSize"
+                                        (onChange)="props.buttonIconSize = $event; setButtonIconSize(props.buttonIconSize)">
+                                    </property-slider>
+                                </div>
+
+                            </div>
+                            <app-not-found *ngIf="!selected" title="No Object Selected" class="no-data-margin">
+                            </app-not-found>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="editor-container">
+            <div class="canvas-wrapper">
+                <div id="canvas-container">
+                    <span class="error">{{error}}</span>
+                    <div class="canvas-item-container">
+                        <canvas id="canvas"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

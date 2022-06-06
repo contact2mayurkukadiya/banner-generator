@@ -1,0 +1,4 @@
+<button class="labled-style-buttons" (click)="onButtonClick()" [style.backgroundColor]="backgroundColor" [style.color]="color" [ngClass]="{'padding': !iconSrc}">
+    <img [src]="iconSrc" *ngIf="iconSrc" class="labled-icon" [style.width.px]="iconSize" [style.height.px]="iconSize" />
+    <span class="lable">{{lable}}</span>
+</button>

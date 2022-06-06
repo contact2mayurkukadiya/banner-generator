@@ -1,0 +1,33 @@
+.labled-style-buttons {
+  background-color: #1e1e1e;
+  border: none;
+  outline: 0 !important;
+  padding: 5px;
+  border-radius: 5px;
+  cursor: pointer;
+  color: white;
+}
+
+.labled-style-buttons:active {
+  box-shadow: inset 0px 0px 10px #374168;
+}
+
+.labled-icon {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  min-height: 20px;
+  margin: 0px 5px 0px 0px;
+}
+
+.lable {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.padding {
+  padding: 0px 10px;
+  min-height: 30px;
+}

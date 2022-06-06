@@ -1,0 +1,125 @@
+/* You can add global styles to this file, and also import other style files */
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
+  font-family: "Roboto", Helvetica, Arial, sans-serif;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.mt-2 {
+  margin-top: 2em;
+}
+.mt-1 {
+  margin-top: 1em;
+}
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* greadient picker class */
+
+.gradient-color-control {
+  display: block;
+}
+
+.gradient-picker-class {
+  margin: 10px;
+}
+
+.canvas-container {
+  /* margin: 20px 0px !important; */
+  margin: 5px 0px !important;
+  transition: 0.5s;
+}
+
+.canvas-container canvas.lower-canvas {
+  background-color: #fff;
+  margin: auto;
+  transition: 0.5s;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.canvas-item-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+#canvas-container .canvas-item-container {
+  margin: 10px !important;
+  position: relative;
+}
+
+.canvasSizeLable {
+  font-size: 14px;
+  color: gray;
+  font-weight: 600;
+  /* position: absolute;
+  top: -5px;
+  left: 0px; */
+}
+
+.unlockCanvasButton {
+  /* background-color: #1e1e1e;
+  outline: none;
+  border: 0px solid transparent;
+  padding: 5px;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  transition: 0.2s;
+  position: absolute;
+  bottom: -15px;
+  right: 0;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center; */
+
+  float: right;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* .unlockCanvasButton:active {
+  opacity: 1;
+}
+
+.unlockCanvasButton:hover {
+  opacity: 0.7;
+} */
+
+/* .unlock-canvas-icon {
+  width: 30px;
+  height: 15px;
+} */

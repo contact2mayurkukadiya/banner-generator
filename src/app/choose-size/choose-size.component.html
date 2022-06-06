@@ -1,0 +1,40 @@
+<div class="choose-size-container">
+    <div class="sizes-container-inner">
+        <div class="width-100">
+            <h1 class="size-heading">Select Size</h1>
+            <div class="next-button-container">
+                <button class="next-button" (click)="moveToGenerator()" [ngClass]="{'disabled': !isSelected}"
+                    [disabled]="!isSelected">Next</button>
+                <button class="next-button select-all-button" (click)="toggleAllSelection()">
+                    <span *ngIf="isAllSelected">Deselect All</span>
+                    <span *ngIf="!isAllSelected">Select All</span>
+                </button>
+            </div>
+        </div>
+        <div class="size-item">
+            <div class="size-icon-cotnainer custom-size">
+                <input type="number" class="custom-size-input" placeholder="Width"
+                    (keydown.enter)="addSize(customWidth, customHeight)" [(ngModel)]="customWidth" />
+                <input type="number" class="custom-size-input" placeholder="Height"
+                    (keydown.enter)="addSize(customWidth, customHeight)" [(ngModel)]="customHeight" />
+                <button class="add-size-button" (keydown.enter)="addSize(customWidth, customHeight)">Add Size</button>
+            </div>
+            <div class="size-item-title">Custom Size</div>
+        </div>
+        <div class="size-item" [ngClass]="{'selected': size.selected}" *ngFor="let size of sizeList; let i = index"
+            (click)="chooseSize(i)">
+            <div class="size-icon-cotnainer">
+                <!-- size-icon-container width : 140, height: 120 -->
+                <!-- size icon width : 75%, height : 60% -->
+                <img [src]="size.icon" class="size-icon" *ngIf="size.icon" />
+                <!-- below calculation is to make blank white div of scaled width an height according to css. so used 0.75 and 0.60 and 120 and 140 value of css into calculation -->
+                <div class="custom-size-icon" *ngIf="!size.icon"
+                    [style.height.px]="size.height < 120 && size.width < 140 ? size.height : size.width >= size.height ? size.height * (140 / size.width) * 0.75 : size.height * (120 / size.height) * 0.60"
+                    [style.width.px]="size.height < 120 && size.width < 140 ? size.width : size.width >= size.height ? size.width * (140 / size.width) * 0.75 : size.width * (120 / size.height) * 0.60">
+                </div>
+            </div>
+            <div class="size-item-title">{{size.sizeName}}</div>
+            <span class="size-item-size">{{size.width}} X {{size.height}} PX</span>
+        </div>
+    </div>
+</div>
