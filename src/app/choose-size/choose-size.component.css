@@ -24,7 +24,7 @@
 }
 
 .size-item.selected .size-icon-cotnainer {
-  background: linear-gradient(90deg, #1980ff 0, #6aacff 100%);
+  background: linear-gradient(90deg, var(--dark-purple) 0, var(--light-purple) 100%);
   box-shadow: 0 10px 20px 0 rgba(82, 110, 222, 0.2);
 }
 
@@ -122,7 +122,7 @@
   width: 120px;
   height: 38px;
   color: white;
-  background: linear-gradient(90deg, #1980ff 0, #6aacff 100%);
+  background: linear-gradient(90deg, var(--dark-purple) 0, var(--light-purple) 100%);
   border-radius: 5px;
   font-size: 14px;
   font-weight: 600;
@@ -135,7 +135,7 @@
 
 .next-button.disabled:hover,
 .next-button.disabled {
-  background: linear-gradient(90deg, #1980ff2e 0, #6aacff40 100%);
+  background: linear-gradient(90deg, var(--dark-purple)2e 0, var(--light-purple)40 100%);
   box-shadow: none;
 }
 
@@ -170,7 +170,7 @@
 }
 
 .custom-size-input:focus {
-  border-color: #1980ff;
+  border-color: var(--dark-purple);
 }
 
 .add-size-button {

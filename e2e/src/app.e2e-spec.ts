@@ -10,7 +10,7 @@ describe('workspace-project App', () => {
 
   it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getTitleText()).toEqual('Welcome to photoadking-banner-generator!');
+    expect(page.getTitleText()).toEqual('Welcome to banner-generator!');
   });
 
   afterEach(async () => {

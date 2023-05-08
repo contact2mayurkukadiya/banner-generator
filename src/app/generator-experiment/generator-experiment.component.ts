@@ -205,11 +205,11 @@ export class GeneratorExperimentComponent implements AfterViewInit {
         obj['angle'] = degree != null ? degree : 0;
         degree == null ? obj['gradientPositionIsCenter'] = true : obj['gradientPositionIsCenter'] = false
         obj['type'] = element.TYPE
- 
+
         arr.push(obj);
       }
     });
- 
+
     console.log(JSON.stringify(arr)); */
 
     var list = localStorage.getItem('sizelist');
@@ -1719,6 +1719,11 @@ export class GeneratorExperimentComponent implements AfterViewInit {
     }, 'center', 'center')
     object.setCoords();
     element.renderAll();
+  }
+
+
+  backToSizes() {
+    this.router.navigate(['/']);
   }
 
   // Export Canvases into JSON

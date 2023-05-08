@@ -1,5 +1,5 @@
 {
-  "name": "photoadking-banner-generator",
+  "name": "banner-generator",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

@@ -31,7 +31,7 @@ export class GradientPickerComponent implements OnInit, AfterViewInit {
   @Input() minColorStop: number = 0;
   @Input() maxColorStop: number = 1;
   @Input() removeAreaBackgroundColor: any = "rgba(255, 0, 0, 0.424)";
-  @Input() backgroundColor: any = "#374168";
+  @Input() backgroundColor: any = "var(--light-black)";
   @Input() removeColorDragAreaTooltip: any = "Drag color pin here for remove color"
   @Input() controlTooltip: any = "Double click to open color picker"
   @Input() addTooltip: any = "Double click to add new color"
@@ -190,7 +190,7 @@ export class GradientPickerComponent implements OnInit, AfterViewInit {
     this.activeColorObject = colorElement;
     // this.onColorControlActivate.emit({ index: index, colorObject: colorElement })
     // Toush start
-    // width and height of color-control = 10 , so according to pythagoras : 
+    // width and height of color-control = 10 , so according to pythagoras :
     // (width * width) + (height * height) = karna * karna (cross line between square box)
     // So We need to add (karna / 2) into left position of color control. so I have calculate karna (200 = (10*10) + (10*10))
     // this step is necessary because color-control is rotated as 45deg.

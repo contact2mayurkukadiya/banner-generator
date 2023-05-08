@@ -37,7 +37,7 @@
   width: 15px;
   height: 15px;
   border-radius: 15px;
-  background: #1980ff;
+  background: var(--dark-purple);
   cursor: pointer;
 }
 
@@ -45,7 +45,7 @@
   width: 15px;
   height: 15px;
   border-radius: 15px;
-  background: #1980ff;
+  background: var(--dark-purple);
   cursor: pointer;
 }
 

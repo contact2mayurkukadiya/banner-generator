@@ -20,7 +20,7 @@
   left: 0;
   width: 75px;
   z-index: 10;
-  background-color: #252526;
+  background-color: var(--dark-black);
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -46,7 +46,7 @@
 }
 
 .tablinks.active {
-  background-color: #374168;
+  background-color: var(--light-black);
   position: relative;
 }
 
@@ -57,7 +57,7 @@
   right: -2px;
   width: 10px;
   height: 10px;
-  background-image: radial-gradient(circle at top left, #fff0 50%, #374168 60%);
+  background-image: radial-gradient(circle at top left, #fff0 50%, var(--light-black) 60%);
 }
 
 .tablinks.active::before {
@@ -67,11 +67,9 @@
   right: -2px;
   width: 10px;
   height: 10px;
-  background-image: radial-gradient(
-    circle at bottom left,
-    #fff0 50%,
-    #374168 60%
-  );
+  background-image: radial-gradient(circle at bottom left,
+      #fff0 50%,
+      var(--light-black) 60%);
 }
 
 .tabcontent {
@@ -81,15 +79,15 @@
 /* tab css over here */
 
 .background-tabs-links.active:hover {
-  background-color: #1a6cd1;
+  background-color: var(--dark-purple);
 }
 
 .background-tabs-links.active {
-  background-color: #1980ff;
+  background-color: var(--dark-purple);
 }
 
 .background-tabs-links {
-  background: #252526;
+  background: var(--dark-black);
   outline: none;
   border: 0px solid transparent;
   cursor: pointer;
@@ -103,7 +101,7 @@
 }
 
 .background-tabs-links:hover {
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .tab-button-btn-background {
@@ -117,7 +115,7 @@
 
 /* property panel css */
 .property-panel {
-  background-color: #374168;
+  background-color: var(--light-black);
   position: absolute;
   top: 0;
   bottom: 0;
@@ -148,7 +146,7 @@
 }
 
 .dark-button {
-  background-color: #252526 !important;
+  background-color: var(--dark-black) !important;
 }
 
 .header-style {
@@ -160,14 +158,14 @@
   height: 60px;
   line-height: 56px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
-  background: linear-gradient(90deg, #1980ff 0, #6aacff 100%);
+  background: linear-gradient(90deg, var(--dark-purple) 0, var(--light-purple) 100%);
 }
 
 .editor-left-sidebar {
   width: 420px;
   height: 100%;
-  /* background: #374168; */
-  background: #edeeee;
+  /* background: var(--light-black); */
+  background: var(--milk-gray);
   display: inline-block;
   /* transition: width 0.2s; */
   transition-property: all;
@@ -186,7 +184,7 @@
 .left-wrapper {
   width: 100%;
   height: 100%;
-  background: #374168;
+  background: var(--light-black);
   overflow: hidden;
   position: absolute;
   top: 0;
@@ -225,7 +223,7 @@
   display: inline-block;
   height: 100%;
   overflow: overlay;
-  background-color: #edeeee;
+  background-color: var(--milk-gray);
   /* position: relative; */
   z-index: 0;
   vertical-align: top;
@@ -281,7 +279,7 @@
 
 .text-size-value-container:focus,
 .text-value-container:focus {
-  border-color: #1980ff;
+  border-color: var(--dark-purple);
 }
 
 .text-size-value-container {
@@ -304,11 +302,11 @@
 }
 
 .font-style-buttons:active {
-  box-shadow: inset 0px 0px 10px #374168;
+  box-shadow: inset 0px 0px 10px var(--light-black);
 }
 
 .font-style-buttons.active {
-  background-color: #1980ff;
+  background-color: var(--dark-purple);
 }
 
 .color-value-display {
@@ -391,7 +389,7 @@
 
 .gradient-type-btn.active,
 .gradient-type-btn:hover {
-  background-color: #1980ff;
+  background-color: var(--dark-purple);
 }
 
 .gradient-icon {
